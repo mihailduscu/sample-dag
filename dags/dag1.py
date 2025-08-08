@@ -1,8 +1,7 @@
-from datetime import timedelta
+from datetime import datetime, timedelta, timezone
 
 from airflow import DAG
 from airflow.operators.python import PythonOperator
-from airflow.utils.dates import days_ago
 
 
 def say_hello():
@@ -18,8 +17,8 @@ with DAG(
     dag_id='hello_world_dag',
     default_args=default_args,
     description='A simple Hello World DAG',
-    schedule_interval=None,      # Only triggered manually
-    start_date=days_ago(1),      # Allows manual runs immediately
+    schedule_interval=None,  # Only triggered manually
+    start_date=datetime.now(timezone.utc) - timedelta(days=1),  # timezone-aware
     catchup=False,
     tags=['example'],
 ) as dag:
