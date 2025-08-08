@@ -17,8 +17,8 @@ with DAG(
     dag_id='hello_world_dag',
     default_args=default_args,
     description='A simple Hello World DAG',
-    schedule_interval=None,  # Only triggered manually
-    start_date=datetime.now(timezone.utc) - timedelta(days=1),  # timezone-aware
+    schedule=None,  # Replaces schedule_interval
+    start_date=datetime.now(timezone.utc) - timedelta(days=1),
     catchup=False,
     tags=['example'],
 ) as dag:
